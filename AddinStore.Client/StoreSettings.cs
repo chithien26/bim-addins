@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace AddinStore;
 
@@ -6,7 +7,10 @@ internal sealed class StoreSettings
 {
     public const string DefaultApi = "https://addin-store.onrender.com";
 
+    [JsonPropertyName("apiBaseUrl")]
     public string ApiBaseUrl { get; set; } = DefaultApi;
+
+    [JsonPropertyName("webBaseUrl")]
     public string? WebBaseUrl { get; set; }
 
     public string Web => string.IsNullOrWhiteSpace(WebBaseUrl) ? ApiBaseUrl : WebBaseUrl.TrimEnd('/');

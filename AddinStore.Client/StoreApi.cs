@@ -38,7 +38,11 @@ internal sealed class StoreApi
         SendAsync<LicenseCheckDto>(() =>
         {
             var uri = new Uri($"{_baseUrl}/api/licenses/check");
-            var body = new { username = identity.Username, email = identity.Email };
+            var body = new LicenseCheckRequest
+            {
+                Username = identity.Username,
+                Email = identity.Email
+            };
             return Http.PostAsJsonAsync(uri, body, StoreJson.Options, cancellationToken);
         });
 

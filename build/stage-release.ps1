@@ -28,6 +28,8 @@ New-Item -ItemType Directory -Force -Path (Join-Path $root 'dist') | Out-Null
 dotnet publish $project -c Release -o $stage
 if ($LASTEXITCODE -ne 0) { throw "Publish add-in thất bại." }
 
+& (Join-Path $PSScriptRoot 'obfuscate-stage.ps1') -Stage $stage -ProjectDir (Split-Path $project) -AssemblyName ([string]$addin.assemblyName)
+
 $template = [System.IO.File]::ReadAllText((Join-Path $PSScriptRoot 'addin.manifest.template'))
 $manifest = $template.
     Replace('__NAME__', [System.Security.SecurityElement]::Escape([string]$addin.name)).
@@ -65,7 +67,7 @@ if (-not $iscc) {
 & $iscc $issPath
 if ($LASTEXITCODE -ne 0) { throw "ISCC thất bại." }
 
-$setup = Join-Path $root "dist\$Slug-setup-$Version.exe"
+$setup = Join-Path $root "dist\$($addin.assemblyName)-$($addin.revitYear)-Setup-$Version.exe"
 $hash = (Get-FileHash $setup -Algorithm SHA256).Hash.ToLowerInvariant()
 Write-Host "setup=$setup"
 Write-Host "sha256=$hash"

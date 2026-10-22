@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace AddinStore;
 
@@ -78,8 +79,13 @@ internal sealed class LicenseStore
 
     private sealed class LicenseFile
     {
+        [JsonPropertyName("valid")]
         public bool Valid { get; set; }
+
+        [JsonPropertyName("expiresAt")]
         public DateTimeOffset? ExpiresAt { get; set; }
+
+        [JsonPropertyName("checkedAt")]
         public DateTimeOffset CheckedAt { get; set; }
     }
 }
