@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "sheet-sync",
+    "name": "Sheet Sync",
+    "project": "src/SheetSync/SheetSync.csproj",
+    "assemblyName": "SheetSync",
+    "applicationClass": "SheetSync.SheetSyncApplication",
+    "addinId": "6F2C1A84-9B37-4E15-A8D2-3C47E0B91F56",
+    "revitYear": "2025"
+  },
+  {
+    "slug": "rebar-mark",
+    "name": "Rebar Mark",
+    "project": "src/RebarMark/RebarMark.csproj",
+    "assemblyName": "RebarMark",
+    "applicationClass": "RebarMark.RebarMarkApplication",
+    "addinId": "C4A8E2D1-5B67-4F90-9C13-8E2D6A4B7F01",
+    "revitYear": "2025"
+  }
+]

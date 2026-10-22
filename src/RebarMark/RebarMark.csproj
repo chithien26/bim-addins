@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Version>1.4.0</Version>
+    <AssemblyName>RebarMark</AssemblyName>
+    <RootNamespace>RebarMark</RootNamespace>
+    <StoreSlug>rebar-mark</StoreSlug>
+    <StoreName>Rebar Mark</StoreName>
+    <StoreAddinId>C4A8E2D1-5B67-4F90-9C13-8E2D6A4B7F01</StoreAddinId>
+    <StoreApplicationClass>RebarMark.RebarMarkApplication</StoreApplicationClass>
+    <Description>Đánh dấu thép. Slug store: rebar-mark. Cần license.</Description>
+  </PropertyGroup>
+  <Import Project="..\..\build\RevitAddin.props" />
+  <Import Project="..\..\build\RevitAddin.targets" />
+</Project>

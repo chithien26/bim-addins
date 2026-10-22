@@ -1,0 +1,45 @@
+#define AddinName "__NAME__"
+#define AddinSlug "__SLUG__"
+#define AddinVersion "__VERSION__"
+#define AddinAssembly "__ASSEMBLY__"
+#define RevitYear "__YEAR__"
+#define StageDir "__STAGE__"
+#define OutputDirPath "__OUTPUT__"
+
+[Setup]
+AppId={{__APPID__}
+AppName={#AddinName}
+AppVersion={#AddinVersion}
+AppPublisher=BIM Add-ins
+DefaultDirName={localappdata}\BIM Add-ins\{#AddinName}
+DisableProgramGroupPage=yes
+OutputDir={#OutputDirPath}
+OutputBaseFilename={#AddinAssembly}-{#RevitYear}-Setup-{#AddinVersion}
+Compression=lzma2
+SolidCompression=yes
+ArchitecturesAllowed=x64
+ArchitecturesInstallIn64BitMode=x64
+PrivilegesRequired=lowest
+CloseApplications=no
+RestartApplications=no
+UninstallDisplayName={#AddinName}
+
+[Files]
+Source: "{#StageDir}\*"; DestDir: "{app}"; Excludes: "*.addin,*.pdb"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#StageDir}\{#AddinAssembly}.addin"; DestDir: "{userappdata}\Autodesk\Revit\Addins\{#RevitYear}"; Flags: ignoreversion
+
+[Code]
+procedure CurStepChanged(CurStep: TSetupStep);
+var
+  Path, Text: String;
+begin
+  if CurStep = ssPostInstall then
+  begin
+    Path := ExpandConstant('{userappdata}\Autodesk\Revit\Addins\{#RevitYear}\{#AddinAssembly}.addin');
+    if LoadStringFromFile(Path, Text) then
+    begin
+      StringChangeEx(Text, '__ASSEMBLY__', ExpandConstant('{app}\{#AddinAssembly}.dll'), True);
+      SaveStringToFile(Path, Text, False);
+    end;
+  end;
+end;

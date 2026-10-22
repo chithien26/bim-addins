@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/RebarMark/RebarMark.csproj" />
+    <Project Path="src/SheetSync/SheetSync.csproj" />
+  </Folder>
+  <Project Path="AddinStore.Client/AddinStore.Client.csproj" />
+  <Project Path="AddinStore.Tests/AddinStore.Tests.csproj" />
+</Solution>

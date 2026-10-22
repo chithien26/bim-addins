@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>__NAME__</Name>
+    <Assembly>__ASSEMBLY__</Assembly>
+    <AddInId>__ID__</AddInId>
+    <FullClassName>__CLASS__</FullClassName>
+    <VendorId>ADST</VendorId>
+    <VendorDescription>BIM Add-ins</VendorDescription>
+  </AddIn>
+</RevitAddIns>

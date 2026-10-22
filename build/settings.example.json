@@ -1,0 +1,4 @@
+{
+  "apiBaseUrl": "http://localhost:8080",
+  "webBaseUrl": "http://localhost:5173"
+}

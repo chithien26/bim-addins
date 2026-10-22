@@ -1,0 +1,49 @@
+name: Release add-in
+
+on:
+  push:
+    tags:
+      - "*-v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Install Inno Setup
+        run: choco install innosetup --yes --no-progress
+      - name: Parse tag
+        shell: pwsh
+        run: |
+          if ($env:GITHUB_REF_NAME -notmatch '^(?<slug>.+)-v(?<version>\d+\.\d+\.\d+)$') {
+            throw "Tag phải dạng slug-vX.Y.Z, ví dụ sheet-sync-v2.1.0"
+          }
+          "SLUG=$($Matches.slug)" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "VERSION=$($Matches.version)" | Out-File -FilePath $env:GITHUB_ENV -Append
+      - name: Test
+        run: dotnet test bim-addins.slnx -c Release
+      - name: Build installer
+        shell: pwsh
+        run: ./build/stage-release.ps1 -Slug $env:SLUG -Version $env:VERSION
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          $exe = Get-ChildItem dist -Filter *.exe | Select-Object -First 1
+          $hash = (Get-FileHash $exe.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          $url = "https://github.com/$env:GITHUB_REPOSITORY/releases/download/$env:GITHUB_REF_NAME/$($exe.Name)"
+          $notes = Join-Path $env:RUNNER_TEMP "release-notes.md"
+          @"
+          sha256: $hash
+
+          Dán vào store, trường githubReleaseUrl:
+          $url
+          "@ | Set-Content -Path $notes -Encoding utf8
+          gh release create $env:GITHUB_REF_NAME $exe.FullName --title "$env:SLUG $env:VERSION" --notes-file $notes

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Version>2.1.0</Version>
+    <AssemblyName>SheetSync</AssemblyName>
+    <RootNamespace>SheetSync</RootNamespace>
+    <StoreSlug>sheet-sync</StoreSlug>
+    <StoreName>Sheet Sync</StoreName>
+    <StoreAddinId>6F2C1A84-9B37-4E15-A8D2-3C47E0B91F56</StoreAddinId>
+    <StoreApplicationClass>SheetSync.SheetSyncApplication</StoreApplicationClass>
+    <Description>Đồng bộ danh mục bản vẽ. Slug store: sheet-sync.</Description>
+  </PropertyGroup>
+  <Import Project="..\..\build\RevitAddin.props" />
+  <Import Project="..\..\build\RevitAddin.targets" />
+</Project>

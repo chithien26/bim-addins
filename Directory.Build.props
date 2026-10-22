@@ -1,0 +1,12 @@
+<Project>
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <Deterministic>true</Deterministic>
+    <RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
+    <RevitApiVersion>2025.4.60</RevitApiVersion>
+  </PropertyGroup>
+</Project>

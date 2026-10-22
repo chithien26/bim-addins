@@ -1,0 +1,5 @@
+<Project>
+  <Target Name="DeployDevAddin" AfterTargets="Build" Condition="'$(StoreSlug)' != '' and '$(Configuration)' == 'Debug'">
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(RepoRoot)build\deploy-dev-addin.ps1&quot; -Name &quot;$(StoreName)&quot; -AssemblyPath &quot;$(TargetPath)&quot; -AddinId &quot;$(StoreAddinId)&quot; -ClassName &quot;$(StoreApplicationClass)&quot; -FileName &quot;$(AssemblyName).addin&quot; -RevitYear &quot;$(RevitYear)&quot;" />
+  </Target>
+</Project>
